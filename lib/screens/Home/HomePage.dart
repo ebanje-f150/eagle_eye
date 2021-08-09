@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           backgroundColor: Colors.blue[900],
           elevation: 62,
-          leading: Icon(Icons.login_rounded),
+          leading: IconButton( onPressed: (){}, icon: Icon(Icons.account_circle ),),
           actions: [Icon(Icons.search)],
           brightness: Brightness.dark,
           shape: RoundedRectangleBorder(
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                   }),
               IconButton(
                   icon: Icon(
-                    Icons.maps_ugc_sharp,
+                    Icons.room_sharp ,
                     color: Colors.white,
                   ),
                   onPressed: () {
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                   }),
               IconButton(
                   icon: Icon(
-                    Icons.person,
+                    Icons.car_rental,
                     color: Colors.white,
                   ),
                   onPressed: () {
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                   }),
               IconButton(
                   icon: Icon(
-                    Icons.question_answer,
+                    Icons.self_improvement,
                     color: Colors.white,
                   ),
                   onPressed: () {
@@ -82,16 +82,54 @@ class _HomePageState extends State<HomePage> {
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                      Expanded(child: Container())
-                  ],
-
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Expanded(
+                          child: Container(
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Demandcard(),
+                            Demandcard(),
+                            Demandcard(),
+                            Demandcard(),
+                            Demandcard(),
+                            Demandcard(),
+                            Demandcard(),
+                            Demandcard(),
+                          ],
+                        ),
+                      )),
+                    ],
+                  ),
                 ),
-              Row(
-                children: [],
-              )
+                Expanded(
+                    flex: 5,
+                    child: Container(
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8, right: 8, top:10),
+                          child: Column(
+
+                            children: [
+                              Posts(),
+                              Posts(),
+                              Posts(),
+                               Posts(),
+                              Posts(),
+                              Posts(), 
+                                Posts(),
+                              Posts(),
+                              Posts(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ))
               ],
             )));
   }

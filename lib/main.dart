@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // import 'screens/Registration/RegistrationPage.dart';
-import 'screens/Map/MapPage.dart';
+import 'screens/Home/HomePage.dart';
 
 
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: MapPage(),
+      home: HomePage(),
       // home: LogInPage(),
     );
   }
