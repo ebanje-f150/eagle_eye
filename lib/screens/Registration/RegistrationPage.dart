@@ -78,7 +78,7 @@ class _ResgistrationState extends State<Resgistration> {
             // )
             Padding(
               padding: const EdgeInsets.only(
-                top: 240,
+                top: 220,
                 left: 0.2,
                 right: 70,
               ),
@@ -145,12 +145,31 @@ class _ResgistrationState extends State<Resgistration> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: TextField(
+                        // controller: _passwordController,
+                        decoration: InputDecoration(
+                          hintText: "phone",
+                          labelText: "Phone Number",
+                          // errorText: _passwordError,
+                          labelStyle:
+                              TextStyle(fontSize: 12, color: Colors.orange),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.phone),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 310, left: 250),
+              padding: const EdgeInsets.only(top: 330, left: 250),
               child: Container(
                   child: Row(
                 children: [

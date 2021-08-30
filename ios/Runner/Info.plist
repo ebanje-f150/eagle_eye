@@ -43,5 +43,11 @@
 		<false/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>To choose an Avata </string>
+		<key>NSCameraUsageDescription</key>
+		<string>To take an avata photo</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>To gain access to micro <string>
 	</dict>
 </plist>

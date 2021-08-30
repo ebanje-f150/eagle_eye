@@ -1,3 +1,4 @@
+import 'package:eagle_eye/screens/Catergory/Catergory.dart';
 import 'package:eagle_eye/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -150,7 +151,13 @@ class _LogInPageState extends State<LogInPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                             Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CatergoryPage()));
+
+                            },
                             child: Text('submit',
                                 style: TextStyle(
                                   color: Colors.black,

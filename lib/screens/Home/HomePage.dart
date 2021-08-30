@@ -1,6 +1,11 @@
+import 'package:eagle_eye/screens/Catergory/CatergoryPage.dart';
+import 'package:eagle_eye/screens/Map/MapPage.dart';
+import 'package:eagle_eye/screens/Profile/Profile.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,7 +30,10 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           backgroundColor: Colors.blue[900],
           elevation: 62,
-          leading: IconButton( onPressed: (){}, icon: Icon(Icons.account_circle ),),
+          leading: IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.account_circle),
+          ),
           actions: [Icon(Icons.search)],
           brightness: Brightness.dark,
           shape: RoundedRectangleBorder(
@@ -51,15 +59,21 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    print('Home');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CatergoryPage()));
                   }),
               IconButton(
                   icon: Icon(
-                    Icons.room_sharp ,
+                    Icons.room_sharp,
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    print('Favorite');
+                     Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MapPage()));
                   }),
               IconButton(
                   icon: Icon(
@@ -67,16 +81,17 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    print('Home');
+                    print('traffic');
                   }),
               IconButton(
                   icon: Icon(
-                    Icons.self_improvement,
+                    Icons.person,
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    print('Favorite');
-                  })
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ProfilePage()));
+                  }),
             ]),
         body: Container(
             height: MediaQuery.of(context).size.height,
@@ -92,14 +107,14 @@ class _HomePageState extends State<HomePage> {
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: [
-                            Demandcard(),
-                            Demandcard(),
-                            Demandcard(),
-                            Demandcard(),
-                            Demandcard(),
-                            Demandcard(),
-                            Demandcard(),
-                            Demandcard(),
+                            Demandcard(Location: 'Nvan',),
+                            Demandcard(Location: 'Mvog Mbi',),
+                            Demandcard(Location: 'POST',),
+                            Demandcard(Location: 'odza petimarche',),
+                            Demandcard(Location: 'mesamendongo',),
+                            Demandcard(Location: 'tropicana',),
+                            Demandcard(Location: 'awae',),
+                            Demandcard(Location: 'nvog ada',),
                           ],
                         ),
                       )),
@@ -111,20 +126,14 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       child: SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 8, right: 8, top:10),
+                          padding:
+                              const EdgeInsets.only(left: 8, right: 8, top: 10),
                           child: Column(
-
                             children: [
-                              Posts(),
-                              Posts(),
-                              Posts(),
-                               Posts(),
-                              Posts(),
-                              Posts(), 
-                                Posts(),
-                              Posts(),
-                              Posts(),
+                              Posts(image: 'assets/paris.jpg',),
+                              Posts( image: 'assets/traffic1.jpg',),
+                              Posts(image: 'assets/traffic2.jpg'),
+                              Posts(image: 'assets/traffic3.jpg'),
                             ],
                           ),
                         ),
@@ -137,9 +146,10 @@ class _HomePageState extends State<HomePage> {
 
 class Posts extends StatelessWidget {
   const Posts({
+    required this.image,
     Key? key,
   }) : super(key: key);
-
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -158,7 +168,7 @@ class Posts extends StatelessWidget {
                 color: Colors.red,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 image: DecorationImage(
-                  image: AssetImage('assets/paris.jpg'),
+                  image: AssetImage(image),
                   fit: BoxFit.cover,
                 )),
           ),
@@ -183,9 +193,10 @@ class Posts extends StatelessWidget {
 
 class Demandcard extends StatelessWidget {
   const Demandcard({
+    required this.Location,
     Key? key,
   }) : super(key: key);
-
+  final Location;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -208,7 +219,7 @@ class Demandcard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Text('LOCATION !!!!!'),
+                  Text(Location),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
