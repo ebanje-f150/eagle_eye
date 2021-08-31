@@ -1,7 +1,9 @@
+import 'package:eagle_eye/roots/RouteApp.dart';
 import 'package:eagle_eye/screens/Catergory/Catergory.dart';
 import 'package:eagle_eye/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../Registration/RegistrationPage.dart';
 
 class LogInPage extends StatefulWidget {
@@ -152,10 +154,7 @@ class _LogInPageState extends State<LogInPage> {
                                       BorderRadius.all(Radius.circular(20))),
                             ),
                             onPressed: () {
-                             Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => CatergoryPage()));
+                             Get.toNamed(RouteApp.catergory);
 
                             },
                             child: Text('submit',
@@ -180,10 +179,7 @@ class _LogInPageState extends State<LogInPage> {
                                       BorderRadius.all(Radius.circular(20))),
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Resgistration()));
+                               Get.toNamed(RouteApp.registration);
                             },
                             child: Text('Register',
                                 style: TextStyle(

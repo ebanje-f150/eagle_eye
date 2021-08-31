@@ -1,11 +1,17 @@
+import 'dart:io';
+import 'package:eagle_eye/roots/RouteApp.dart';
 import 'package:eagle_eye/screens/Catergory/CatergoryPage.dart';
+import 'package:eagle_eye/screens/Home/HomeControler.dart';
 import 'package:eagle_eye/screens/Map/MapPage.dart';
 import 'package:eagle_eye/screens/Profile/Profile.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -59,10 +65,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CatergoryPage()));
+                    Get.toNamed(RouteApp.catergory);
                   }),
               IconButton(
                   icon: Icon(
@@ -70,10 +73,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MapPage()));
+                   Get.toNamed(RouteApp.map);
                   }),
               IconButton(
                   icon: Icon(
@@ -81,7 +81,58 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    print('traffic');
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("MAKE A DEMAND !!"),
+                          content: SingleChildScrollView(
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 4,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 15, bottom: 15),
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                        hintText: '',
+                                        labelText: "LOCATION",
+                                        labelStyle: TextStyle(
+                                            fontSize: 20, color: Colors.orange),
+                                        focusColor: Colors.orange,
+                                        fillColor: Colors.orange,
+                                      ),
+                                      keyboardType: TextInputType.text,
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      FlatButton(
+                                        color: Colors.grey.shade400,
+                                        child: Text("Submit"),
+                                        onPressed: () {
+                                          print('submit');
+                                        },
+                                      ),
+                                      FlatButton(
+                                        color: Colors.grey.shade400,
+                                        child: Text("Close"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   }),
               IconButton(
                   icon: Icon(
@@ -89,8 +140,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()));
+                   Get.toNamed(RouteApp.profile);
                   }),
             ]),
         body: Container(
@@ -107,14 +157,30 @@ class _HomePageState extends State<HomePage> {
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: [
-                            Demandcard(Location: 'Nvan',),
-                            Demandcard(Location: 'Mvog Mbi',),
-                            Demandcard(Location: 'POST',),
-                            Demandcard(Location: 'odza petimarche',),
-                            Demandcard(Location: 'mesamendongo',),
-                            Demandcard(Location: 'tropicana',),
-                            Demandcard(Location: 'awae',),
-                            Demandcard(Location: 'nvog ada',),
+                            Demandcard(
+                              Location: 'Nvan',
+                            ),
+                            Demandcard(
+                              Location: 'Mvog Mbi',
+                            ),
+                            Demandcard(
+                              Location: 'POST',
+                            ),
+                            Demandcard(
+                              Location: 'odza',
+                            ),
+                            Demandcard(
+                              Location: 'bonne 10',
+                            ),
+                            Demandcard(
+                              Location: 'tropicana',
+                            ),
+                            Demandcard(
+                              Location: 'awae',
+                            ),
+                            Demandcard(
+                              Location: 'nvog ada',
+                            ),
                           ],
                         ),
                       )),
@@ -130,8 +196,12 @@ class _HomePageState extends State<HomePage> {
                               const EdgeInsets.only(left: 8, right: 8, top: 10),
                           child: Column(
                             children: [
-                              Posts(image: 'assets/paris.jpg',),
-                              Posts( image: 'assets/traffic1.jpg',),
+                              Posts(
+                                image: 'assets/paris.jpg',
+                              ),
+                              Posts(
+                                image: 'assets/traffic1.jpg',
+                              ),
                               Posts(image: 'assets/traffic2.jpg'),
                               Posts(image: 'assets/traffic3.jpg'),
                             ],
@@ -191,7 +261,7 @@ class Posts extends StatelessWidget {
   }
 }
 
-class Demandcard extends StatelessWidget {
+class Demandcard extends GetWidget<HomeController> {
   const Demandcard({
     required this.Location,
     Key? key,
@@ -202,47 +272,70 @@ class Demandcard extends StatelessWidget {
     return Row(
       children: [
         Container(
-            width: MediaQuery.of(context).size.width * 0.5,
-            height: MediaQuery.of(context).size.height * 0.15,
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.orange.shade900,
-                  style: BorderStyle.solid,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.white, blurRadius: 1.0, spreadRadius: 1.0)
-                ]),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text(Location),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.star, color: Colors.yellow),
-                      TextButton(
-                          onPressed: () {},
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.orange[900],
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                          ),
-                          child: Text('EXECUTE',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                              )))
-                    ],
-                  )
-                ],
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: MediaQuery.of(context).size.height * 0.15,
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.orange.shade900,
+                style: BorderStyle.solid,
+                width: 2,
               ),
-            )),
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.white, blurRadius: 1.0, spreadRadius: 1.0)
+              ]),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text(Location,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                    )),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          controller.getImage(ImageSource.camera);
+                        },
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.blue[900],
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                        ),
+                        child: Text(
+                          'EXECUTE',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ],
     );
+  }
+}
+
+class Dialog extends StatelessWidget {
+  const Dialog({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return (Container(
+      child: Text('me'),
+    ));
   }
 }

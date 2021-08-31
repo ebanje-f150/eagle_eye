@@ -58,7 +58,9 @@ class _ItemsPageNavState extends State<ItemsPageNav> {
     if (pickedFile != null) {
       File imageFile = File(pickedFile.path);
     }
-}}
+}
+
+}
 
 
 

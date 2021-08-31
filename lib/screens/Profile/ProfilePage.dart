@@ -104,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             fillColor: Colors.orange,
                                           ),
                                           keyboardType:
-                                              TextInputType.emailAddress,
+                                              TextInputType.name,
                                           
                                         ),
                                         Row(

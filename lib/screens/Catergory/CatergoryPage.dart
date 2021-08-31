@@ -1,7 +1,9 @@
+import 'package:eagle_eye/roots/RouteApp.dart';
 import 'package:eagle_eye/screens/Home/HomePage.dart';
 import 'package:eagle_eye/screens/Items/ItemsPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CatergoryPage extends StatefulWidget {
   const CatergoryPage({Key? key}) : super(key: key);
@@ -62,11 +64,7 @@ class _CatergoryPageState extends State<CatergoryPage> {
                                 ),
                                 FloatingActionButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomePage()));
+                                       Get.toNamed(RouteApp.home);
                                     },
                                     child: Icon(Icons.arrow_forward)),
                               ],
@@ -118,11 +116,7 @@ class _CatergoryPageState extends State<CatergoryPage> {
                                 ),
                                 FloatingActionButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ItemsPageNav()));
+                                       Get.toNamed(RouteApp.items);
                                     },
                                     child: Icon(Icons.arrow_forward)),
                               ],

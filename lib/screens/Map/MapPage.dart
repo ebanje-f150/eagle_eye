@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-
-
+import 'package:get/get.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -40,13 +38,22 @@ class _MapState extends State<MapPage> {
 
     _locationData = await location.getLocation();
 
-    mapController!.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: LatLng(_locationData.latitude!.toDouble(),
-            _locationData.longitude!.toDouble()),),),);
+    mapController!.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(_locationData.latitude!.toDouble(),
+              _locationData.longitude!.toDouble()),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    AppBar(
+      title:Text('EAGLE EYE '),
+      centerTitle: true,
+    );
     return Stack(
       children: [
         GoogleMap(

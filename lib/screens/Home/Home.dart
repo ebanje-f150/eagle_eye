@@ -1,3 +1,3 @@
-export './Home.Binding.dart';
+export 'HomeBinding.dart';
 export './HomeControler.dart';
 export './HomePage.dart';

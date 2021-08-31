@@ -1,9 +1,10 @@
 
+import 'package:eagle_eye/roots/RouteApp.dart';
+import 'package:eagle_eye/roots/pagesApp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-import 'screens/welcome/welcomePage.dart';
 
 
 
@@ -17,8 +18,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-         home: WelcomePage(),
-    //   home:MapPage(),
+  //  initialBinding: MainBinding(),
+       debugShowCheckedModeBanner: false,
+      title: 'EAGLE EYE',
+      theme: ThemeData(
+      
+        primarySwatch: Colors.blue,
+      ),
+       initialRoute: RouteApp.welcome,
+      getPages: PageApp.pages,
+     
     );
   }
 }
+
