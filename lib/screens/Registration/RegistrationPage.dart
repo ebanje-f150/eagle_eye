@@ -1,18 +1,12 @@
-
-
+import 'package:eagle_eye/roots/RouteApp.dart';
+import 'package:eagle_eye/screens/Registration/Registration.dart';
 import 'package:eagle_eye/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../log-in/logInPage.dart';
 
-class Resgistration extends StatefulWidget {
-  const Resgistration({Key? key}) : super(key: key);
-
-  @override
-  _ResgistrationState createState() => _ResgistrationState();
-}
-
-class _ResgistrationState extends State<Resgistration> {
+class Resgistration extends GetView<RegistrationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,88 +77,116 @@ class _ResgistrationState extends State<Resgistration> {
                 right: 70,
               ),
               child: Container(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'username',
-                          labelText: "NAME",
-                          labelStyle:
-                              TextStyle(fontSize: 12, color: Colors.orange),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
+                child: Form(
+                  key: controller.registrationFormKey,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: TextFormField(
+                          controller: controller.nameController,
+                          onSaved: (name) {
+                            controller.name = name!;
+                          },
+                          validator: (name) {
+                            controller.name;
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'username',
+                            labelText: "NAME",
+                            labelStyle:
+                                TextStyle(fontSize: 12, color: Colors.orange),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            focusColor: Colors.orange,
+                            fillColor: Colors.orange,
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.accessible),
+                              onPressed: () {},
+                            ),
                           ),
-                          focusColor: Colors.orange,
-                          fillColor: Colors.orange,
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.accessible),
-                            onPressed: () {},
-                          ),
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                        // maxLength: 20,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 10),
-                      child: TextField(
-                        // controller: _passwordController,
-                        decoration: InputDecoration(
-                          hintText: "Password",
-                          labelText: "Password",
-                          // errorText: _passwordError,
-                          labelStyle:
-                              TextStyle(fontSize: 12, color: Colors.orange),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.security),
-                            onPressed: () {},
-                          ),
+                          keyboardType: TextInputType.text,
+                          // maxLength: 20,
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: TextField(
-                        // controller: _passwordController,
-                        decoration: InputDecoration(
-                          hintText: "email",
-                          labelText: "Email",
-                          // errorText: _passwordError,
-                          labelStyle:
-                              TextStyle(fontSize: 12, color: Colors.orange),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.email),
-                            onPressed: () {},
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        child: TextFormField(
+                          controller: controller.passwordController,
+                          onSaved: (password) {
+                            controller.password = password!;
+                          },
+                          validator: (password) {
+                            controller.validatepassword(password!);
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Password",
+                            labelText: "Password",
+                            // errorText: _passwordError,
+                            labelStyle:
+                                TextStyle(fontSize: 12, color: Colors.orange),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.security),
+                              onPressed: () {},
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: TextField(
-                        // controller: _passwordController,
-                        decoration: InputDecoration(
-                          hintText: "phone",
-                          labelText: "Phone Number",
-                          // errorText: _passwordError,
-                          labelStyle:
-                              TextStyle(fontSize: 12, color: Colors.orange),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.phone),
-                            onPressed: () {},
+                      Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: TextFormField(
+                          controller: controller.emailController,
+                          onSaved: (email) {
+                            controller.email = email!;
+                          },
+                          validator: (email) {
+                            controller.validateEmail(email!);
+                          },
+                          decoration: InputDecoration(
+                            hintText: "email",
+                            labelText: "Email",
+                            // errorText: _passwordError,
+                            labelStyle:
+                                TextStyle(fontSize: 12, color: Colors.orange),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.email),
+                              onPressed: () {},
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: TextFormField(
+                          controller: controller.phoneController,
+                          onSaved: (phone) {
+                            controller.phone = phone!;
+                          },
+                          validator: (phone) {
+                            controller.phone;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "phone",
+                            labelText: "Phone Number",
+                            // errorText: _passwordError,
+                            labelStyle:
+                                TextStyle(fontSize: 12, color: Colors.orange),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.phone),
+                              onPressed: () {},
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -175,10 +197,8 @@ class _ResgistrationState extends State<Resgistration> {
                 children: [
                   FloatingActionButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LogInPage()));
+                        controller.checkRegistration();
+                        Get.toNamed(RouteApp.login);
                       },
                       child: Icon(Icons.keyboard_arrow_right_sharp))
                 ],

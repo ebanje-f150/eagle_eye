@@ -1,19 +1,13 @@
 import 'package:eagle_eye/roots/RouteApp.dart';
 import 'package:eagle_eye/screens/Catergory/Catergory.dart';
+import 'package:eagle_eye/screens/log-in/logIn.dart';
 import 'package:eagle_eye/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Registration/RegistrationPage.dart';
 
-class LogInPage extends StatefulWidget {
-  const LogInPage({Key? key}) : super(key: key);
-
-  @override
-  _LogInPageState createState() => _LogInPageState();
-}
-
-class _LogInPageState extends State<LogInPage> {
+class LogInPage extends GetView<LoginController> {
   bool _secureText = true;
   @override
   Widget build(BuildContext context) {
@@ -84,113 +78,135 @@ class _LogInPageState extends State<LogInPage> {
             Padding(
               padding: const EdgeInsets.only(top: 280, left: 30, right: 30),
               child: Container(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'username',
-                          labelText: "NAME",
-                          labelStyle:
-                              TextStyle(fontSize: 15, color: Colors.orange),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          focusColor: Colors.orange,
-                          fillColor: Colors.orange,
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.accessible),
-                            onPressed: () {
-                              setState(() {
-                                _secureText = !_secureText;
-                              });
-                            },
-                          ),
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                        maxLength: 20,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 10, left: 10, right: 10, bottom: 2),
-                      child: TextField(
-                        // controller: _passwordController,
-                        decoration: InputDecoration(
-                            hintText: "Password",
-                            labelText: "Password",
-                            // errorText: _passwordError,
+                child: Form(
+                  key: controller.logInFormKey,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: TextFormField(
+                          controller: controller.emailController,
+                          onSaved: (email) {
+                            controller.email = email!;
+                          },
+                          validator: (email) {
+                            if (!email!.contains("@")) {
+                              return "enter a valide email";
+                            }
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'email',
+                            labelText: "EMAIL",
                             labelStyle:
                                 TextStyle(fontSize: 15, color: Colors.orange),
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            focusColor: Colors.orange,
+                            fillColor: Colors.orange,
                             suffixIcon: IconButton(
-                              icon: Icon(_secureText
-                                  ? Icons.remove_red_eye
-                                  : Icons.security),
-                              onPressed: () {
-                                setState(() {
-                                  _secureText = !_secureText;
-                                });
-                              },
-                            )),
-                        obscureText: _secureText,
+                              icon: Icon(Icons.accessible),
+                              onPressed: () {},
+                            ),
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 5, left: 10, right: 10, bottom: 2),
-                      child: Container(
-                          width: MediaQuery.of(context).size.width / 0.5,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                            ),
-                            onPressed: () {
-                             Get.toNamed(RouteApp.catergory);
-
-                            },
-                            child: Text('submit',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                )),
-                            //  child: const Icon(Icons.arrow_forward),
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 40, right: 40, bottom: 0),
-                      child: Container(
-                          width: MediaQuery.of(context).size.width / 0.5,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                            ),
-                            onPressed: () {
-                               Get.toNamed(RouteApp.registration);
-                            },
-                            child: Text('Register',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                )),
-                            //  child: const Icon(Icons.arrow_forward),
-                          )),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 10, left: 10, right: 10, bottom: 2),
+                        child: TextFormField(
+                          controller: controller.passwordController,
+                          onSaved: (password) {
+                            controller.password = password!;
+                          },
+                          validator: (password) {
+                            if (password!.length < 5) {
+                              return "please! enter a valid password. password must be greater than 5 characters";
+                            }
+                          },
+                          decoration: InputDecoration(
+                              hintText: "Password",
+                              labelText: "Password",
+                              // errorText: _passwordError,
+                              labelStyle:
+                                  TextStyle(fontSize: 15, color: Colors.orange),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              suffixIcon: IconButton(
+                                icon: Icon(_secureText
+                                    ? Icons.remove_red_eye
+                                    : Icons.security),
+                                onPressed: () {},
+                              )),
+                          obscureText: _secureText,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 5, left: 10, right: 10, bottom: 2),
+                        child: Container(
+                            width: MediaQuery.of(context).size.width / 0.5,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                              ),
+                              onPressed: () {
+                                if (!controller.logInFormKey.currentState!
+                                    .validate()) {
+                                  return null;
+                                }else{
+                                  Get.toNamed(RouteApp.catergory);
+                                }
+                                // controller.checkLogin();
+                               
+                              },
+                              child: Text('submit',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  )),
+                              //  child: const Icon(Icons.arrow_forward),
+                            )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 0, left: 40, right: 40, bottom: 0),
+                        child: Container(
+                            width: MediaQuery.of(context).size.width / 0.5,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                              ),
+                              onPressed: () {
+                                 Get.toNamed(RouteApp.registration);
+                                // if (controller.password.isEmpty &&
+                                //     controller.email.isEmpty) {
+                                // } else {
+                                //   Get.toNamed(RouteApp.registration);
+                                // }
+                              },
+                              child: Text('Register',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  )),
+                              //  child: const Icon(Icons.arrow_forward),
+                            )),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

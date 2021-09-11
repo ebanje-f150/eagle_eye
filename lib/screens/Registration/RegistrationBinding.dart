@@ -1,9 +1,9 @@
-import 'package:get/get.dart'; 
+import 'package:eagle_eye/screens/Registration/Registration.dart';
+import 'package:get/get.dart';
 
-class RegistrationBinging extends Bindings{
+class RegistrationBinging extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
+    Get.lazyPut(() => RegistrationController());
   }
-
 }

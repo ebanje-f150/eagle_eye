@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       
         primarySwatch: Colors.blue,
       ),
-       initialRoute: RouteApp.welcome,
+       initialRoute: RouteApp.home,
       getPages: PageApp.pages,
      
     );

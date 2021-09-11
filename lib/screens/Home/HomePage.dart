@@ -1,26 +1,12 @@
-import 'dart:io';
 import 'package:eagle_eye/roots/RouteApp.dart';
-import 'package:eagle_eye/screens/Catergory/CatergoryPage.dart';
 import 'package:eagle_eye/screens/Home/HomeControler.dart';
-import 'package:eagle_eye/screens/Map/MapPage.dart';
-import 'package:eagle_eye/screens/Profile/Profile.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:location/location.dart';
-import 'package:get/get.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                   Get.toNamed(RouteApp.map);
+                    Get.toNamed(RouteApp.map);
                   }),
               IconButton(
                   icon: Icon(
@@ -95,6 +81,10 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.only(
                                         top: 15, bottom: 15),
                                     child: TextField(
+                                      onChanged: (location) {
+                                        controller.location.value = location;
+                                        print(location);
+                                      },
                                       decoration: InputDecoration(
                                         hintText: '',
                                         labelText: "LOCATION",
@@ -114,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.grey.shade400,
                                         child: Text("Submit"),
                                         onPressed: () {
-                                          print('submit');
+                                          controller.onSaveLocation();
                                         },
                                       ),
                                       FlatButton(
@@ -140,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                   Get.toNamed(RouteApp.profile);
+                    Get.toNamed(RouteApp.profile);
                   }),
             ]),
         body: Container(
@@ -148,7 +138,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
@@ -166,21 +156,11 @@ class _HomePageState extends State<HomePage> {
                             Demandcard(
                               Location: 'POST',
                             ),
-                            Demandcard(
-                              Location: 'odza',
-                            ),
-                            Demandcard(
-                              Location: 'bonne 10',
-                            ),
-                            Demandcard(
-                              Location: 'tropicana',
-                            ),
-                            Demandcard(
-                              Location: 'awae',
-                            ),
-                            Demandcard(
-                              Location: 'nvog ada',
-                            ),
+                          
+                         
+                          
+                         
+                          
                           ],
                         ),
                       )),
@@ -188,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Expanded(
-                    flex: 5,
+                    flex: 6,
                     child: Container(
                       child: SingleChildScrollView(
                         child: Padding(
@@ -272,13 +252,13 @@ class Demandcard extends GetWidget<HomeController> {
     return Row(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          height: MediaQuery.of(context).size.height * 0.15,
+          width: MediaQuery.of(context).size.width * 0.7,
+          height: MediaQuery.of(context).size.height * 0.8,
           decoration: BoxDecoration(
               border: Border.all(
-                color: Colors.orange.shade900,
+                // color: Colors.orange.shade900,
                 style: BorderStyle.solid,
-                width: 2,
+                width: 5,
               ),
               borderRadius: BorderRadius.all(Radius.circular(5)),
               boxShadow: [
@@ -286,7 +266,7 @@ class Demandcard extends GetWidget<HomeController> {
                     color: Colors.white, blurRadius: 1.0, spreadRadius: 1.0)
               ]),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(top: 5),
             child: Column(
               children: [
                 Text(Location,
@@ -313,7 +293,7 @@ class Demandcard extends GetWidget<HomeController> {
                           'EXECUTE',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 10,
                           ),
                         ),
                       ),
@@ -326,16 +306,5 @@ class Demandcard extends GetWidget<HomeController> {
         ),
       ],
     );
-  }
-}
-
-class Dialog extends StatelessWidget {
-  const Dialog({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return (Container(
-      child: Text('me'),
-    ));
   }
 }
