@@ -4,7 +4,6 @@ import 'package:eagle_eye/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../log-in/logInPage.dart';
 
 class Resgistration extends GetView<RegistrationController> {
   @override

@@ -22,7 +22,7 @@ class HomeController extends GetxController {
 
   void onSaveLocation() {
     RemoteProvider().newDemand(
-        d_location: location.toString(),
+        d_location: location.value,
         d_date: Date.toString(),
         onSucess: (locationdata) {
           print('LOCATION SAVED SUCCESFULLY ');
